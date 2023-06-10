@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-api
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.api.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      securityContext:
+        runAsGroup: 1000
+        runAsUser: 1000
+      containers:
+        - name: {{ .Release.Name }}-api
+          image: {{ .Values.api.image }}:{{ .Values.api.tag }}
+          ports:
+            - name: apiport
+              containerPort: {{ .Values.api.containerport }}
+          resources: {{ toYaml .Values.api.resources | nindent 12 }}
