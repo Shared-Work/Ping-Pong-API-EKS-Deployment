@@ -138,4 +138,4 @@ helm install [RELEASE_NAME] prometheus-community/kube-prometheus-stack -n moniro
 ```
 kubectl port-forward svc/prometheus-kube-prometheus-prometheus 9090:9090 -n monitoring
 ```
-11- to create some k8s-alerts, file with name **kus-alerts.yaml** created under kube-prometheus-stack/templates/prometheus/rules-1.14
+11- to create some k8s-alerts, file with name **k8s-alerts.yaml** created under kube-prometheus-stack/templates/prometheus/rules-1.14
