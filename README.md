@@ -124,3 +124,18 @@ helm upgrade -i  ping-pong-api Ping-Pong-API/helm -n ping-pong-api
 ```
 
 8- ELB will be created on aws , so you can use the dns name with port 3000 to access your api.
+
+9- for Prometheus : using this repos https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack to install kube-prometheus-stack
+
+```
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+kubectl create ns monitoring
+helm install [RELEASE_NAME] prometheus-community/kube-prometheus-stack -n moniroring
+```
+
+10- using kubernetes port forward to access prometheus dashboard
+```
+kubectl port-forward svc/prometheus-kube-prometheus-prometheus 9090:9090 -n monitoring
+```
+11- to create some k8s-alerts, file with name **kus-alerts.yaml** created under kube-prometheus-stack/templates/prometheus/rules-1.14
